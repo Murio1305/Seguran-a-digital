@@ -1,0 +1,49 @@
+:root{
+    --fundo-texto: #001f3f;
+    --branco: #ffffff;
+    --borda: #1875E8;
+}
+
+body{
+    background-color: #03122F;
+    color: var(--branco);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.parametro-senha{
+    width: fit-content;
+    margin: 50px auto;
+}
+
+.parametro-senha__titulo{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.parametro-senha-botoes{
+    display: flex;
+    justify-content: center;
+}
+
+.parametro-senha__botao{
+    background-color: var(--fundo-texto);
+    color: var(--branco);
+    border: 2px solid var(--borda);
+    padding: 24px;
+    font-size: 24px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.parametro-senha__botao:hover{
+    background-color: var(--borda);
+}
+
+.parametro-senha__texto{
+    padding: 24px;
+    border-top: 2px solid var(--borda);
+    border-bottom: 2px solid var(--borda);
+    margin: 0;
+    font-size: 24px;
+}
