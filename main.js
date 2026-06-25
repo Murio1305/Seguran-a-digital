@@ -91,7 +91,7 @@ function classificaSenha(tamanhoAlfabeto) {
 
   if (valorEntropia) {
     valorEntropia.textContent =
-      '🖥️ Um computador pode levar até ' +
+      'Um computador pode levar até ' +
       dias.toLocaleString('pt-BR') +
       ' dias para descobrir essa senha.';
   }
@@ -106,7 +106,7 @@ if (campoSenha) {
       await navigator.clipboard.writeText(campoSenha.value);
 
       const textoOriginal = campoSenha.value;
-      campoSenha.value = '📋 Senha copiada!';
+      campoSenha.value = 'Senha copiada!';
 
       setTimeout(() => {
         campoSenha.value = textoOriginal;
