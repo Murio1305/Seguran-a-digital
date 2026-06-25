@@ -12,111 +12,109 @@ const letrasMinusculas = 'abcdefghijklmnopqrstuvwxyz';
 const numeros = '0123456789';
 const simbolos = '!@#$%&*?';
 
-numeroSenha.textContent = tamanhoSenha;
+if (numeroSenha) numeroSenha.textContent = tamanhoSenha;
 
 // Atualiza ano do footer
-document.getElementById('ano-atual').textContent = new Date().getFullYear();
+const anoAtual = document.getElementById('ano-atual');
+if (anoAtual) anoAtual.textContent = new Date().getFullYear();
 
 // Eventos dos botões
-botoes[0].addEventListener('click', diminuiTamanho);
-botoes[1].addEventListener('click', aumentaTamanho);
+if (botoes[0]) botoes[0].addEventListener('click', diminuiTamanho);
+if (botoes[1]) botoes[1].addEventListener('click', aumentaTamanho);
 
 // Eventos dos checkboxes
-checkbox.forEach(item => {
-item.addEventListener('click', geraSenha);
+checkbox.forEach((item) => {
+  item.addEventListener('click', geraSenha);
 });
 
 function diminuiTamanho() {
-if (tamanhoSenha > 1) {
-tamanhoSenha--;
-numeroSenha.textContent = tamanhoSenha;
-geraSenha();
-}
+  if (tamanhoSenha > 1) {
+    tamanhoSenha--;
+    if (numeroSenha) numeroSenha.textContent = tamanhoSenha;
+    geraSenha();
+  }
 }
 
 function aumentaTamanho() {
-if (tamanhoSenha < 30) {
-tamanhoSenha++;
-numeroSenha.textContent = tamanhoSenha;
-geraSenha();
-}
+  if (tamanhoSenha < 30) {
+    tamanhoSenha++;
+    if (numeroSenha) numeroSenha.textContent = tamanhoSenha;
+    geraSenha();
+  }
 }
 
 function geraSenha() {
+  let alfabeto = '';
 
-```
-let alfabeto = '';
+  if (checkbox[0]?.checked) alfabeto += letrasMaiusculas;
+  if (checkbox[1]?.checked) alfabeto += letrasMinusculas;
+  if (checkbox[2]?.checked) alfabeto += numeros;
+  if (checkbox[3]?.checked) alfabeto += simbolos;
 
-if (checkbox[0].checked) alfabeto += letrasMaiusculas;
-if (checkbox[1].checked) alfabeto += letrasMinusculas;
-if (checkbox[2].checked) alfabeto += numeros;
-if (checkbox[3].checked) alfabeto += simbolos;
-
-if (alfabeto.length === 0) {
-    campoSenha.value = 'Selecione uma opção';
-    valorEntropia.textContent = '';
-    forcaSenha.className = 'forca fraca';
+  if (alfabeto.length === 0) {
+    if (campoSenha) campoSenha.value = 'Selecione uma opção';
+    if (valorEntropia) valorEntropia.textContent = '';
+    if (forcaSenha) {
+      forcaSenha.classList.remove('fraca', 'media', 'forte');
+      forcaSenha.classList.add('fraca');
+    }
     return;
-}
+  }
 
-let senha = '';
-
-for (let i = 0; i < tamanhoSenha; i++) {
+  let senha = '';
+  for (let i = 0; i < tamanhoSenha; i++) {
     const indice = Math.floor(Math.random() * alfabeto.length);
     senha += alfabeto[indice];
-}
+  }
 
-campoSenha.value = senha;
+  if (campoSenha) campoSenha.value = senha;
 
-classificaSenha(alfabeto.length);
-```
-
+  classificaSenha(alfabeto.length);
 }
 
 function classificaSenha(tamanhoAlfabeto) {
+  const entropia = tamanhoSenha * Math.log2(tamanhoAlfabeto);
 
-```
-const entropia = tamanhoSenha * Math.log2(tamanhoAlfabeto);
+  if (forcaSenha) {
+    forcaSenha.classList.remove('fraca', 'media', 'forte');
 
-forcaSenha.classList.remove('fraca', 'media', 'forte');
+    if (entropia >= 57) {
+      forcaSenha.classList.add('forte');
+    } else if (entropia >= 35) {
+      forcaSenha.classList.add('media');
+    } else {
+      forcaSenha.classList.add('fraca');
+    }
+  }
 
-if (entropia >= 57) {
-    forcaSenha.classList.add('forte');
-} else if (entropia >= 35) {
-    forcaSenha.classList.add('media');
-} else {
-    forcaSenha.classList.add('fraca');
-}
+  const dias = Math.floor((2 ** entropia) / (100000000 * 60 * 60 * 24));
 
-const dias = Math.floor(
-    (2 ** entropia) / (100000000 * 60 * 60 * 24)
-);
-
-valorEntropia.textContent =
-    "Um computador pode levar até " +
-    dias.toLocaleString('pt-BR') +
-    " dias para descobrir essa senha.";
-```
-
+  if (valorEntropia) {
+    valorEntropia.textContent =
+      'Um computador pode levar até ' +
+      dias.toLocaleString('pt-BR') +
+      ' dias para descobrir essa senha.';
+  }
 }
 
 // Copiar senha ao clicar
-campoSenha.addEventListener('click', () => {
+if (campoSenha) {
+  campoSenha.addEventListener('click', async () => {
+    if (!campoSenha.value || campoSenha.value === 'Selecione uma opção') return;
 
-```
-if (campoSenha.value === 'Selecione uma opção') return;
+    try {
+      await navigator.clipboard.writeText(campoSenha.value);
 
-navigator.clipboard.writeText(campoSenha.value);
+      const textoOriginal = campoSenha.value;
+      campoSenha.value = 'Senha copiada!';
 
-const textoOriginal = campoSenha.value;
-
-campoSenha.value = 'Senha copiada!';
-
-setTimeout(() => {
-    campoSenha.value = textoOriginal;
-}, 1000);
-```
-
-});
+      setTimeout(() => {
+        campoSenha.value = textoOriginal;
+      }, 1000);
+    } catch (e) {
+      alert('Não foi possível copiar automaticamente. Seu navegador pode bloquear o clipboard.');
+    }
+  });
+}
 
 geraSenha();
