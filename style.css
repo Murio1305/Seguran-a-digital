@@ -47,10 +47,12 @@ body{
 
 /* 🔐 CADEADO MENOR */
 .cadeado{
-    width: 45px;
+    width: 30px !important;
+    max-width: 30px;
     height: auto;
     display: block;
     margin: 0 auto 10px auto;
+}
 }
 
 .conteudo-senha{
