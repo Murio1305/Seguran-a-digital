@@ -45,6 +45,14 @@ body{
     margin-top: 80px;
 }
 
+/* 🔐 CADEADO MENOR */
+.cadeado{
+    width: 45px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
 .conteudo-senha{
     margin-top: 80px;
     background: var(--fundo-senha);
@@ -212,12 +220,6 @@ label{
 
 .footer-links a:hover{
     color: #00f5ff;
-}
-
-/* 🔽 AJUSTE DO TAMANHO DO CADEADO */
-.cadeado{
-    width: 60px;
-    height: auto;
 }
 
 @media screen and (max-width: 768px){
