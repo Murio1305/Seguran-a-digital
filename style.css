@@ -28,6 +28,27 @@ body{
     margin: 0;
 }
 
+/* 🔐 CABEÇALHO */
+.conteudo-titulo{
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* 🔐 CADEADO (AGORA PERFEITO) */
+.cadeado{
+    width: 120px;
+    max-width: 140px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+    filter: drop-shadow(0 0 10px #00f5ff);
+    transition: .3s;
+}
+
+.cadeado:hover{
+    transform: scale(1.05);
+}
+
 .titulo-principal{
     font-family: var(--roboto-mono);
     font-size: 36px;
@@ -40,19 +61,7 @@ body{
     color: #c9d1d9;
 }
 
-.conteudo-titulo{
-    text-align: center;
-    margin-top: 80px;
-}
-
-/* 🔐 CADEADO MENOR */
-.cadeado{
-    width: 120px;
-    height: auto;
-    display: block;
-    margin: 0 auto 10px auto;
-}
-
+/* 🔐 SENHA */
 .conteudo-senha{
     margin-top: 80px;
     background: var(--fundo-senha);
@@ -75,12 +84,14 @@ body{
     outline: none;
 }
 
+/* 🔐 CONTAINER */
 .conteudo{
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* 🔐 PARAMETROS */
 .parametro{
     background-color: var(--fundo-senha);
     border: 2px solid var(--borda);
@@ -140,6 +151,7 @@ body{
     font-size: 24px;
 }
 
+/* 🔐 CHECKBOX */
 label{
     font-size: 20px;
 }
@@ -150,6 +162,7 @@ label{
     cursor: pointer;
 }
 
+/* 🔐 BARRA DE FORÇA */
 .barra{
     background-color: #2d3748;
     height: 30px;
@@ -180,6 +193,7 @@ label{
     background: #32d74b;
 }
 
+/* 🔐 TEXTOS FORÇA */
 .parametro-senha-textos{
     display: flex;
     justify-content: space-between;
@@ -190,6 +204,7 @@ label{
     line-height: 1.5;
 }
 
+/* 🔐 FOOTER */
 .footer{
     background: #161b22;
     color: #8b949e;
@@ -222,6 +237,7 @@ label{
     color: #00f5ff;
 }
 
+/* 📱 RESPONSIVO */
 @media screen and (max-width: 768px){
 
     .titulo-principal{
@@ -239,6 +255,10 @@ label{
 
     .parametro-senha{
         width: 100%;
+    }
+
+    .cadeado{
+        width: 90px;
     }
 }
 
